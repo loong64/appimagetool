@@ -63,8 +63,6 @@ index 191b527..d86f130 100644
 EOF
 
 # custom patch to fix build on gcc-14
-if [[ $(gcc -dumpversion) -gt 14 ]]; then
-
 cat > fix-build-with-gcc-14.patch <<\EOF
 Description: Fix build with GCC-14
 Author: Marcos Talau <talau@debian.org>
@@ -156,8 +154,6 @@ Index: zsync-0.6.2/libzsync/zsync.h
  /* zsync_needed_byte_ranges - get the byte ranges needed from a URL.
   * Returns the number of ranges in *num, and a malloc'd array (to be freed 
 EOF
-
-fi
 
 for i in *.patch; do
     echo "Applying patch $i..."
