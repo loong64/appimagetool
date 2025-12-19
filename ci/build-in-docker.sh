@@ -20,6 +20,9 @@ case "$ARCH" in
     aarch64)
         platform=linux/arm64/v8
         ;;
+    loongarch64)
+        platform=linux/loong64
+        ;;
     *)
         echo "unknown architecture: $ARCH"
         exit 2
@@ -29,6 +32,10 @@ esac
 
 # libassuan-static is supported only from 3.19 onwards
 image=alpine:3.19
+# LoongArch64 only suports 3.21 onwards
+if [[ "$ARCH" == "loongarch64" ]]; then
+    image=ghcr.io/loong64/alpine:3.21
+fi
 
 repo_root="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/..)"
 
