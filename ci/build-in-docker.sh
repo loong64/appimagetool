@@ -69,9 +69,19 @@ set -euxo pipefail
 apk add bash git gcc g++ cmake make file wget \
     gpgme-dev libgcrypt-dev libgcrypt-static argp-standalone zstd-dev zstd-static util-linux-static \
     glib-static libassuan-static zlib-static libgpg-error-static \
-    curl-dev curl-static nghttp2-static libidn2-static openssl-libs-static brotli-static c-ares-static libunistring-static \
+    curl-dev curl-static nghttp2-static libidn2-static openssl-libs-static brotli-static libunistring-static \
     glib-static glib-dev autoconf automake meson \
     libpsl-dev libpsl-static patch
+
+# Build c-ares-static manually, because the package is not available anymore
+wget -O c-ares.tar.gz https://github.com/c-ares/c-ares/releases/download/v1.34.6/c-ares-1.34.6.tar.gz
+tar xf c-ares.tar.gz
+cd c-ares-1.34.6
+./configure --enable-static --disable-shared --prefix=/usr
+make
+make install
+cd ..
+rm -rf c-ares-1.34.6 c-ares.tar.gz
 
 # libcurl's pkg-config scripts are broken. everywhere, everytime.
 # these additional flags have been collected from all the .pc files whose libs are mentioned as -l<lib> in Libs.private
