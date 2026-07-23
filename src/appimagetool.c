@@ -768,7 +768,7 @@ main (int argc, char *argv[])
         }
 
         /* Determine the architecture */
-        bool archs[4] = {0, 0, 0, 0};
+        bool archs[5] = {0, 0, 0, 0, 0};
         extract_arch_from_text(getenv("ARCH"), "Environmental variable ARCH", archs);
         if (count_archs(archs) != 1) {
             /* If no $ARCH variable is set check a file */
